@@ -23,6 +23,7 @@ class TicTacToe:
         self.winner = None
         self.draw = False
         self.board = [[None]*3 for _ in range(3)]
+        self.show_home_screen = True
 
         # Load and scale images
         self.logo_img = game.transform.scale(game.image.load("./assets/logo.png"), (SCREEN_WIDTH, SCREEN_HEIGHT + 100))
@@ -55,9 +56,6 @@ class TicTacToe:
         game.display.update()
 
     def game_window_init(self):
-        self.screen.blit(self.logo_img, (0, 0))
-        game.display.update()
-        time.sleep(1)
         self.screen.fill(SCREEN_BACKGROUND_COLOR)
         self.draw_lines()
         self.draw_status()
@@ -119,18 +117,42 @@ class TicTacToe:
         self.board = [[None]*3 for _ in range(3)]
         self.game_window_init()
 
-    def run(self):
-        self.game_window_init()
+    def draw_home_screen(self):
+        self.screen.fill(SCREEN_BACKGROUND_COLOR)
+        self.screen.blit(self.logo_img, (0, 0))
 
+        font = game.font.Font(None, 50)
+        
+
+        play_button = font.render("PLAY", True, (255, 255, 255), (0, 0, 0))
+        play_button_rect = play_button.get_rect(center=(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 50))
+        self.screen.blit(play_button, play_button_rect)
+
+        game.display.update()
+        return play_button_rect
+
+    def run(self):
         while True:
-            for event in game.event.get():
-                if event.type == QUIT:
-                    game.quit()
-                    sys.exit()
-                elif event.type == MOUSEBUTTONDOWN:
-                    self.user_click()
-                    if self.winner or self.draw:
-                        self.reset_game()
+            if self.show_home_screen:
+                play_button_rect = self.draw_home_screen()
+
+                for event in game.event.get():
+                    if event.type == QUIT:
+                        game.quit()
+                        sys.exit()
+                    elif event.type == MOUSEBUTTONDOWN:
+                        if play_button_rect.collidepoint(event.pos):
+                            self.show_home_screen = False
+                            self.game_window_init()
+            else:
+                for event in game.event.get():
+                    if event.type == QUIT:
+                        game.quit()
+                        sys.exit()
+                    elif event.type == MOUSEBUTTONDOWN:
+                        self.user_click()
+                        if self.winner or self.draw:
+                            self.reset_game()
 
             game.display.update()
             self.clock.tick(FPS)
