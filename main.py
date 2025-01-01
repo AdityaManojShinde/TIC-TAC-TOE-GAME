@@ -16,6 +16,8 @@ class TicTacToe:
         game.init()
         self.screen = game.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT + 100), 0, 32)
         game.display.set_caption(CAPTION)
+        icon = game.image.load('./assets/logo.png')
+        game.display.set_icon(icon)
         self.clock = game.time.Clock()
 
         # Game variables
