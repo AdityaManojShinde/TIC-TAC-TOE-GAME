@@ -13,7 +13,9 @@ FPS = 30
 
 class TicTacToe:
     def __init__(self):
+        # initalize pygame
         game.init()
+        # screen setup
         self.screen = game.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT + 100), 0, 32)
         game.display.set_caption(CAPTION)
         icon = game.image.load('./assets/logo.png')
@@ -28,7 +30,7 @@ class TicTacToe:
         self.show_home_screen = True
 
         # Load and scale images
-        self.logo_img = game.transform.scale(game.image.load("./assets/logo.png"), (SCREEN_WIDTH, SCREEN_HEIGHT + 100))
+        self.logo_img = game.transform.scale(game.image.load("./assets/logo.png"), (SCREEN_WIDTH/2, SCREEN_HEIGHT / 2))
         self.x_img = game.transform.scale(game.image.load("./assets/x.png"), (80, 80))
         self.o_img = game.transform.scale(game.image.load("./assets/o.png"), (80, 80))
 
@@ -121,14 +123,24 @@ class TicTacToe:
 
     def draw_home_screen(self):
         self.screen.fill(SCREEN_BACKGROUND_COLOR)
-        self.screen.blit(self.logo_img, (0, 0))
+        self.screen.blit(self.logo_img, (SCREEN_WIDTH * 0.25, SCREEN_HEIGHT * 0.25))
 
-        font = game.font.Font(None, 50)
-        
+        # Font
+        font = game.font.Font(None, 36)
 
-        play_button = font.render("PLAY", True, (255, 255, 255), (0, 0, 0))
-        play_button_rect = play_button.get_rect(center=(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 50))
-        self.screen.blit(play_button, play_button_rect)
+            # Define button dimensions and properties
+        button_width, button_height = 150, 50
+        button_x = (SCREEN_WIDTH - button_width) / 2
+        button_y = SCREEN_HEIGHT * 0.90 - button_height / 2
+        play_button_rect = game.Rect(button_x, button_y, button_width, button_height)
+
+        # Draw the button background with border radius
+        game.draw.rect(self.screen, (0, 0, 0), play_button_rect, border_radius=20)
+
+        # Render the text and center it on the button
+        play_button = font.render("Play", True, (255, 255, 255))
+        text_rect = play_button.get_rect(center=play_button_rect.center)
+        self.screen.blit(play_button, text_rect)
 
         game.display.update()
         return play_button_rect
