@@ -7,9 +7,13 @@ from pygame.locals import *
 SCREEN_WIDTH = 400
 SCREEN_HEIGHT = 400
 SCREEN_BACKGROUND_COLOR = (255, 255, 255)
-LINE_COLOR = (0, 0, 0)
+LINE_COLOR = (79, 117, 255)
+WIN_LINE_COLOR = (0, 0, 0)
+SECONDARY_COLOR = (124, 245, 255)
+PRIMARY_COLOR = (100, 57, 255)
 CAPTION = "TIC TAC TOE"
 FPS = 30
+
 
 class TicTacToe:
     def __init__(self):
@@ -30,15 +34,16 @@ class TicTacToe:
         self.show_home_screen = True
 
         # Load and scale images
-        self.logo_img = game.transform.scale(game.image.load("./assets/logo.png"), (SCREEN_WIDTH/2, SCREEN_HEIGHT / 2))
-        self.x_img = game.transform.scale(game.image.load("./assets/x.png"), (80, 80))
-        self.o_img = game.transform.scale(game.image.load("./assets/o.png"), (80, 80))
+        self.logo_img = game.transform.smoothscale(game.image.load("./assets/logo.png").convert_alpha(), (SCREEN_WIDTH/2, SCREEN_HEIGHT / 2))
+        self.x_img = game.transform.smoothscale(game.image.load("./assets/x.png").convert_alpha(), (80, 80))
+        self.o_img = game.transform.smoothscale(game.image.load("./assets/o.png").convert_alpha(), (80, 80))
 
     def draw_lines(self):
         # Draw vertical and horizontal lines
+        space = 30
         for i in range(1, 3):
-            game.draw.line(self.screen, LINE_COLOR, (SCREEN_WIDTH / 3 * i, 0), (SCREEN_WIDTH / 3 * i, SCREEN_HEIGHT), 7)
-            game.draw.line(self.screen, LINE_COLOR, (0, SCREEN_HEIGHT / 3 * i), (SCREEN_WIDTH, SCREEN_HEIGHT / 3 * i), 7)
+            game.draw.line(self.screen, LINE_COLOR, (SCREEN_WIDTH / 3 * i, space), (SCREEN_WIDTH / 3 * i, SCREEN_HEIGHT - space), 7)
+            game.draw.line(self.screen, LINE_COLOR, (space, SCREEN_HEIGHT / 3 * i), (SCREEN_WIDTH - space, SCREEN_HEIGHT / 3 * i), 7)
 
     def draw_status(self):
         message = ""
@@ -54,7 +59,7 @@ class TicTacToe:
         font = game.font.Font(None, 30)
         text = font.render(message, True, (255, 255, 255))
 
-        self.screen.fill((0, 0, 0), (0, 400, 500, 100))
+        self.screen.fill(PRIMARY_COLOR, (0, 400, 500, 100))
         text_rect = text.get_rect(center=(SCREEN_WIDTH / 2, 450))
         self.screen.blit(text, text_rect)
         game.display.update()
@@ -68,20 +73,20 @@ class TicTacToe:
         for row in range(3):
             if self.board[row][0] == self.board[row][1] == self.board[row][2] and self.board[row][0] is not None:
                 self.winner = self.board[row][0]
-                game.draw.line(self.screen, (250, 0, 0), (0, (row + 0.5) * SCREEN_HEIGHT / 3), (SCREEN_WIDTH, (row + 0.5) * SCREEN_HEIGHT / 3), 4)
+                game.draw.line(self.screen, WIN_LINE_COLOR, (0, (row + 0.5) * SCREEN_HEIGHT / 3), (SCREEN_WIDTH, (row + 0.5) * SCREEN_HEIGHT / 3), 4)
 
         for col in range(3):
             if self.board[0][col] == self.board[1][col] == self.board[2][col] and self.board[0][col] is not None:
                 self.winner = self.board[0][col]
-                game.draw.line(self.screen, (250, 0, 0), ((col + 0.5) * SCREEN_WIDTH / 3, 0), ((col + 0.5) * SCREEN_WIDTH / 3, SCREEN_HEIGHT), 4)
+                game.draw.line(self.screen, WIN_LINE_COLOR, ((col + 0.5) * SCREEN_WIDTH / 3, 0), ((col + 0.5) * SCREEN_WIDTH / 3, SCREEN_HEIGHT), 4)
 
         if self.board[0][0] == self.board[1][1] == self.board[2][2] and self.board[0][0] is not None:
             self.winner = self.board[0][0]
-            game.draw.line(self.screen, (250, 0, 0), (50, 50), (350, 350), 4)
+            game.draw.line(self.screen, WIN_LINE_COLOR, (50, 50), (350, 350), 4)
 
         if self.board[0][2] == self.board[1][1] == self.board[2][0] and self.board[0][2] is not None:
             self.winner = self.board[0][2]
-            game.draw.line(self.screen, (250, 0, 0), (350, 50), (50, 350), 4)
+            game.draw.line(self.screen, WIN_LINE_COLOR, (350, 50), (50, 350), 4)
 
         if all(all(row) for row in self.board) and self.winner is None:
             self.draw = True
@@ -135,7 +140,7 @@ class TicTacToe:
         play_button_rect = game.Rect(button_x, button_y, button_width, button_height)
 
         # Draw the button background with border radius
-        game.draw.rect(self.screen, (0, 0, 0), play_button_rect, border_radius=20)
+        game.draw.rect(self.screen, SECONDARY_COLOR, play_button_rect, border_radius=20)
 
         # Render the text and center it on the button
         play_button = font.render("Play", True, (255, 255, 255))
