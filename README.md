@@ -4,6 +4,16 @@ A simple and interactive Tic Tac Toe game built using Python and Pygame. The gam
 
 ---
 
+## Screenshots
+
+### Home Screen
+
+![Home Screen](./assets/screenshots/1.png)
+
+### Gameplay
+
+![Gameplay](./assets/screenshots/2.png)
+
 ## Features
 
 - **Home Screen**: Includes a logo, game title, and a play button.
