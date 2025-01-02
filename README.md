@@ -6,9 +6,9 @@ A simple and interactive Tic Tac Toe game built using Python and Pygame. The gam
 
 ## Screenshots
 
-<p align="center">
-  <img src="./assets//screenshots/v2_one.png" width="150" height="150" style="border-radius: 50%; margin-right: 10px;" />
-  <img src="./assets//screenshots/v2_two.png" width="150" height="150" style="border-radius: 50%;" />
+<p align="center" style="display: flex; gap: 20;">
+  <img src="./assets//screenshots/v2_one.png" width="200" height="200" style="border-radius: 50%; margin-right: 10px;" />
+  <img src="./assets//screenshots/v2_two.png" width="200" height="200" style="border-radius: 50%;" />
 </p>
 
 ## Features
