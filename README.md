@@ -6,13 +6,10 @@ A simple and interactive Tic Tac Toe game built using Python and Pygame. The gam
 
 ## Screenshots
 
-### Home Screen
-
-![Home Screen](./assets/screenshots/v2_one.png)
-
-### Gameplay
-
-![Gameplay](./assets/screenshots/v2_two.png)
+<p align="center">
+  <img src="./assets//screenshots/v2_one.png" width="150" height="150" style="border-radius: 50%; margin-right: 10px;" />
+  <img src="./assets//screenshots/v2_two.png" width="150" height="150" style="border-radius: 50%;" />
+</p>
 
 ## Features
 
