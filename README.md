@@ -8,11 +8,11 @@ A simple and interactive Tic Tac Toe game built using Python and Pygame. The gam
 
 ### Home Screen
 
-![Home Screen](./assets/screenshots/1.png)
+![Home Screen](./assets/screenshots/v2_one.png)
 
 ### Gameplay
 
-![Gameplay](./assets/screenshots/2.png)
+![Gameplay](./assets/screenshots/v2_two.png)
 
 ## Features
 
