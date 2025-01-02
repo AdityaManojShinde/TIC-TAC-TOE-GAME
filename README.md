@@ -45,7 +45,7 @@ pip install pygame
 2. Ensure all assets (e.g., `logo.png`, `x.png`, `o.png`) are present in the `assets` folder.
 3. Run the game using:
    ```bash
-   python tic_tac_toe.py
+   python main.py
    ```
 4. Click the "PLAY" button on the home screen to start the game.
 
@@ -70,7 +70,7 @@ project/
 │   ├── logo.png
 │   ├── x.png
 │   └── o.png
-├── tic_tac_toe.py
+├── main.py
 └── README.md
 ```
 
